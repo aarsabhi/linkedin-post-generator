@@ -16,8 +16,11 @@ from urllib.parse import urlparse
 load_dotenv()
 
 # Initialize API keys
-AZURE_API_KEY = os.getenv("AZURE_API_KEY", "d2fc3cb33a1046b5936b9d9995322f2d")
-AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT", "https://idpoai.openai.azure.com")
+AZURE_API_KEY = os.getenv("AZURE_API_KEY", "b07ae056-6feb-4db0-b3d4-35d95e7cad32")
+AZURE_ENDPOINT = os.getenv(
+    "AZURE_ENDPOINT",
+    "https://genai-nexus.api.corpinter.net/apikey",
+)
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "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")
 
 # Initialize Tavily client
@@ -27,10 +30,10 @@ tavily = TavilyClient(api_key=TAVILY_API_KEY)
 openai.api_type = "azure"
 openai.api_key = AZURE_API_KEY
 openai.api_base = AZURE_ENDPOINT
-openai.api_version = "2023-07-01-preview"
+openai.api_version = "2024-10-21"
 
 # Azure OpenAI Deployment Name
-AZURE_DEPLOYMENT_NAME = "gpt-4o"
+AZURE_DEPLOYMENT_NAME = "gpt-5"
 
 # Free proxy list for YouTube requests
 PROXY_LIST = [
@@ -93,8 +96,8 @@ def summarize_content(text, title=""):
         response = openai.ChatCompletion.create(
             engine=AZURE_DEPLOYMENT_NAME,
             messages=messages,
-            temperature=0.5,
-            max_tokens=500
+            # temperature=0.5,
+            max_completion_tokens=4000,
         )
         
         return response.choices[0].message.content.strip()
@@ -113,8 +116,8 @@ def extract_statistics_and_quotes(text):
         response = openai.ChatCompletion.create(
             engine=AZURE_DEPLOYMENT_NAME,
             messages=messages,
-            temperature=0.3,
-            max_tokens=500
+            # temperature=0.3,
+            max_completion_tokens=4000,
         )
         
         return response.choices[0].message.content.strip()
@@ -310,11 +313,11 @@ def generate_linkedin_post(content, tone="professional", content_type="topic", s
         response = openai.ChatCompletion.create(
             engine=AZURE_DEPLOYMENT_NAME,
             messages=messages,
-            temperature=0.7,
-            max_tokens=800,
-            top_p=1,
-            frequency_penalty=0,
-            presence_penalty=0
+            # temperature=0.7,
+            max_completion_tokens=4000,
+            # top_p=1,
+            # frequency_penalty=0,
+            # presence_penalty=0,
         )
         
         return response.choices[0].message.content.strip()
