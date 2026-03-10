@@ -43,7 +43,7 @@ PROXY_LIST = [
 
 # Page configuration
 st.set_page_config(
-    page_title="LinkedIn Post Generator",
+    page_title="Gaurav's Linkedin Post",
     page_icon="📝",
     layout="wide"
 )
@@ -326,7 +326,7 @@ def generate_linkedin_post(content, tone="professional", content_type="topic", s
         return None
 
 # Main content area
-st.title("🚀 LinkedIn Post Generator")
+st.title("🚀 Gaurav's Linkedin Post")
 st.markdown("### Transform Your Ideas into Engaging LinkedIn Content")
 
 # Input type selection
